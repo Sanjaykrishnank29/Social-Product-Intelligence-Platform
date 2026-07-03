@@ -1,0 +1,144 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: si_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-siuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sipass123}
+      POSTGRES_DB: ${POSTGRES_DB:-socialintel_db}
+    ports:
+      - "5433:5432"
+    volumes:
+      - si_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-siuser} -d ${POSTGRES_DB:-socialintel_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
+    container_name: si_elasticsearch
+    restart: always
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9201:9200"
+    volumes:
+      - si_es_data:/usr/share/elasticsearch/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: si_backend
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-siuser}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-sipass123}
+      - POSTGRES_DB=${POSTGRES_DB:-socialintel_db}
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
+      - FASTAPI_ENV=${FASTAPI_ENV:-development}
+      - SMTP_SERVER=${SMTP_SERVER}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SMTP_FROM_NAME=${SMTP_FROM_NAME}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    ports:
+      - "${BACKEND_PORT:-8001}:8000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      db:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_started
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  airflow-init:
+    build:
+      context: ./pipeline
+      dockerfile: Dockerfile.airflow
+    environment:
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://siuser:sipass123@db:5432/si_airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    depends_on:
+      db:
+        condition: service_healthy
+    command: db init
+
+  airflow-scheduler:
+    build:
+      context: ./pipeline
+      dockerfile: Dockerfile.airflow
+    restart: always
+    environment:
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://siuser:sipass123@db:5432/si_airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - POSTGRES_USER=${POSTGRES_USER:-siuser}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-sipass123}
+      - POSTGRES_DB=${POSTGRES_DB:-socialintel_db}
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
+      - SMTP_SERVER=${SMTP_SERVER}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SMTP_FROM_NAME=${SMTP_FROM_NAME}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./pipeline:/opt/airflow/pipeline
+      - ./config:/opt/airflow/config
+      - ./backend:/opt/airflow/backend
+    depends_on:
+      db:
+        condition: service_healthy
+
+  airflow-webserver:
+    build:
+      context: ./pipeline
+      dockerfile: Dockerfile.airflow
+    restart: always
+    environment:
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://siuser:sipass123@db:5432/si_airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - POSTGRES_USER=${POSTGRES_USER:-siuser}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-sipass123}
+      - POSTGRES_DB=${POSTGRES_DB:-socialintel_db}
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
+      - SMTP_SERVER=${SMTP_SERVER}
+      - SMTP_PORT=${SMTP_PORT}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SMTP_FROM_NAME=${SMTP_FROM_NAME}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./pipeline:/opt/airflow/pipeline
+      - ./config:/opt/airflow/config
+      - ./backend:/opt/airflow/backend
+    depends_on:
+      db:
+        condition: service_healthy
+    command: webserver
+
+volumes:
+  si_postgres_data:
+  si_es_data:

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Executive Intelligence | Sentiment Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#191c1e",
+                    "on-secondary-container": "#00714d",
+                    "background": "#f7f9fb",
+                    "on-error-container": "#93000a",
+                    "inverse-surface": "#2d3133",
+                    "tertiary": "#000000",
+                    "on-error": "#ffffff",
+                    "outline": "#76777d",
+                    "tertiary-fixed": "#ffdad3",
+                    "on-surface-variant": "#45464d",
+                    "on-secondary-fixed": "#002113",
+                    "surface-variant": "#e0e3e5",
+                    "tertiary-container": "#3e0500",
+                    "surface": "#f7f9fb",
+                    "secondary-fixed-dim": "#4edea3",
+                    "primary-fixed": "#dae2fd",
+                    "on-tertiary-container": "#cf644e",
+                    "on-secondary-fixed-variant": "#005236",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#bec6e0",
+                    "secondary": "#006c49",
+                    "secondary-container": "#6cf8bb",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#d8dadc",
+                    "surface-tint": "#565e74",
+                    "primary": "#000000",
+                    "surface-container-high": "#e6e8ea",
+                    "primary-container": "#131b2e",
+                    "on-tertiary-fixed": "#3e0500",
+                    "on-primary-fixed": "#131b2e",
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "surface-container-low": "#f2f4f6",
+                    "outline-variant": "#c6c6cd",
+                    "primary-fixed-dim": "#bec6e0",
+                    "surface-container-highest": "#e0e3e5",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "surface-container": "#eceef0",
+                    "on-primary-container": "#7c839b",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "gutter": "24px",
+                    "container-padding": "32px",
+                    "card-gap": "24px",
+                    "section-margin": "48px"
+            },
+            "fontFamily": {
+                    "body-md": ["Outfit"],
+                    "label-md": ["Outfit"],
+                    "headline-lg": ["Outfit"],
+                    "display-xl": ["Outfit"],
+                    "label-sm": ["Outfit"],
+                    "title-lg": ["Outfit"],
+                    "headline-md": ["Outfit"],
+                    "body-lg": ["Outfit"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f7f9fb;
+            overflow-x: hidden;
+        }
+
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 30%, #dae2fd 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, #6ffbbe33 0%, transparent 40%),
+                        radial-gradient(circle at 50% 50%, #f7f9fb 0%, #eceef0 100%);
+            filter: blur(80px);
+        }
+
+        .glass-nav {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        .neumorphic-button {
+            box-shadow: 4px 4px 10px rgba(203, 213, 225, 0.5), -4px -4px 10px rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+        }
+
+        .neumorphic-button:active {
+            box-shadow: inset 2px 2px 5px rgba(203, 213, 225, 0.5), inset -2px -2px 5px rgba(255, 255, 255, 0.8);
+            transform: scale(0.98);
+        }
+
+        .neumorphic-card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .word-cloud-item {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .word-cloud-item:hover {
+            transform: scale(1.1);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e0e3e5;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<div class="aurora-bg"></div>
+<!-- SideNavBar -->
+<nav class="h-screen w-72 fixed left-0 top-0 z-50 bg-surface/30 backdrop-blur-3xl border-r border-white/40 flex flex-col py-8 px-4">
+<div class="mb-10 px-4">
+<h1 class="font-headline-md text-headline-md font-extrabold text-on-surface tracking-tight">Executive Intelligence</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Market Insights</p>
+</div>
+<div class="space-y-2 flex-grow">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-white/10 rounded-full transition-all duration-300" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Pricing Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-white/10 rounded-full transition-all duration-300" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-label-md text-label-md">Catalog Management</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-3 bg-primary text-on-primary rounded-full px-4 py-3 shadow-md active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Sentiment Tracker</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-white/10 rounded-full transition-all duration-300" href="#">
+<span class="material-symbols-outlined">compare_arrows</span>
+<span class="font-label-md text-label-md">Platform Comparison</span>
+</a>
+</div>
+<div class="mt-auto pt-8 border-t border-white/20 space-y-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-white/10 rounded-full transition-all duration-300" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-white/10 rounded-full transition-all duration-300" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="ml-72 min-h-screen p-container-padding">
+<!-- TopNavBar (Simplified for Content Shell) -->
+<header class="w-full h-16 sticky top-0 z-40 bg-surface/40 backdrop-blur-3xl border-b border-white/40 flex justify-between items-center px-gutter mb-8 rounded-xl shadow-sm">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Sentiment Tracker</span>
+<div class="h-4 w-[1px] bg-outline-variant mx-2"></div>
+<span class="text-on-surface-variant font-body-md text-body-md">Q4 Analytics Overview</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<input class="bg-surface-container-lowest border-none rounded-full py-2 px-10 focus:ring-2 focus:ring-primary/20 w-64 font-body-md text-body-md shadow-sm transition-all" placeholder="Search insights..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant">search</span>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img alt="User Profile" data-alt="Professional headshot of a senior executive male in a dark suit with a neutral, confident expression. The lighting is soft and studio-quality, emphasizing clarity and reliability against a minimalist light grey background, fitting the high-end Executive Intelligence brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGFEgdGi6ZAbo3N1RqkhQFySYdM6mNyTehTZjWPeBUV_-8CNfrAW7r4U6J247LLQhUc5-dYqYXGn2vekFNotgh43_Omq5f5xZt9u0D9rF6EnoZd0ojmH1rGXZH0sCWlGeKC3Z9Z2ZoBC0T1eYPOu47-NgSALieU_gHk4lU3UNrrdqBlpZv0gYF2vjMiTNob9gwoKx8S1MI5llEm65Lpu5JpyVFkf_4VvETt5COa9pbggBxJ49YkDJOSC8EMajnyckAOSCeiE5_CNY"/>
+</div>
+</div>
+</header>
+<!-- KPI Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-card-gap mb-section-margin">
+<!-- Sentiment Score -->
+<div class="bg-surface-container-lowest p-gutter rounded-[16px] neumorphic-card flex flex-col justify-between h-48 border border-white/50">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Overall Sentiment</span>
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+</div>
+<div>
+<h2 class="font-display-xl text-display-xl text-on-surface">78.4<span class="text-headline-md font-medium">%</span></h2>
+<p class="text-on-secondary-container font-label-sm text-label-sm flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span> +4.2% from last month
+                    </p>
+</div>
+</div>
+<!-- Total Mentions -->
+<div class="bg-surface-container-lowest p-gutter rounded-[16px] neumorphic-card flex flex-col justify-between h-48 border border-white/50">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Total Mentions</span>
+<span class="material-symbols-outlined text-primary">chat_bubble</span>
+</div>
+<div>
+<h2 class="font-display-xl text-display-xl text-on-surface">12.8K</h2>
+<p class="text-on-surface-variant font-label-sm text-label-sm mt-1">Aggregated across 4 platforms</p>
+</div>
+</div>
+<!-- Net Promoter Score -->
+<div class="bg-surface-container-lowest p-gutter rounded-[16px] neumorphic-card flex flex-col justify-between h-48 border border-white/50">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Avg. NPS</span>
+<span class="material-symbols-outlined text-on-tertiary-container">stars</span>
+</div>
+<div>
+<h2 class="font-display-xl text-display-xl text-on-surface">62</h2>
+<p class="text-on-tertiary-container font-label-sm text-label-sm flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">remove</span> Consistent with Q3
+                    </p>
+</div>
+</div>
+<!-- Risk Factor -->
+<div class="bg-surface-container-lowest p-gutter rounded-[16px] neumorphic-card flex flex-col justify-between h-48 border border-white/50">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Negative Surge</span>
+<span class="material-symbols-outlined text-error">warning</span>
+</div>
+<div>
+<h2 class="font-display-xl text-display-xl text-on-surface">2.1<span class="text-headline-md font-medium">%</span></h2>
+<p class="text-on-error-container font-label-sm text-label-sm flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span> -0.8% decrease in friction
+                    </p>
+</div>
+</div>
+</div>
+<!-- Bento Grid Main Content -->
+<div class="grid grid-cols-12 gap-card-gap items-start">
+<!-- Platform Trends (Left) -->
+<div class="col-span-12 lg:col-span-8 space-y-card-gap">
+<div class="bg-surface-container-lowest p-container-padding rounded-[16px] neumorphic-card border border-white/50">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">NPS Trends by Platform</h3>
+<p class="text-on-surface-variant font-body-md text-body-md">Comparative analysis of customer loyalty metrics.</p>
+</div>
+<div class="flex gap-2">
+<button class="neumorphic-button bg-surface px-4 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant">Daily</button>
+<button class="neumorphic-button bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md text-label-md">Weekly</button>
+</div>
+</div>
+<div class="space-y-6">
+<!-- Amazon -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-2">
+<img class="w-5 h-5 grayscale opacity-50" data-alt="A minimalist, monochromatic black and white Amazon logo on a light background. The style is clean and corporate, maintaining the premium Executive Intelligence aesthetic of data density and professional clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOfUoUEVHJILDT4MBYsChK-7gfSMGgMqKLEOwHvJMOBTaG-_QXUwGjWAGSvhRE-eQR7pY8bZQQNZ6jQmA7gkTcmYF8NdzRBHvKFy1vOtsLnX2eGSoWLGw_-OQXPo0Ekc0JidTiQqYGw7fOKs7GAI0BukZImLBBgeJUX_MpBnSZgNWxRZTEIzPhPrYbxpti_JaNp9ZVl4k-7dRxKS8snkdmeIQYIF5NVJPRCAeTNYFbhIAGHVkrstXznsYq6Yagj2FCiWQQjjbCRMc"/> Amazon
+                                </span>
+<span class="font-label-md text-label-md text-secondary">+12%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-3 overflow-hidden border border-white/40">
+<div class="bg-secondary h-full rounded-full w-[82%] shadow-sm"></div>
+</div>
+</div>
+<!-- Flipkart -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-2">
+<img class="w-5 h-5 grayscale opacity-50" data-alt="A minimalist, monochromatic black and white Flipkart logo on a light background. The style is clean and corporate, maintaining the premium Executive Intelligence aesthetic of data density and professional clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOERi9Kd3ORdZpKOMnQx4z2VKx8tpACR0KPzM3aXUk6FXhalX0gb-vfVlC4z4LGqj5B6j1cWVvWjxqdhjH6tNMDUBkYJSZ1mAQnxRPeL0b-2d8b3eWOTZ4nKfegiIVByM3YRrns59z3H-_HtDGiurB3InHQaIkDfewat6rOVYq4c1YO7MA1Oi5iMDtlSrfiLeLMaAP48h2_xMFPKocjRbAYYn21s8VSZ8Fo_ZXz5_KEcVegC42LiTrgRLWTosAkcAL_lqExN2nePo"/> Flipkart
+                                </span>
+<span class="font-label-md text-label-md text-on-surface-variant">+3%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-3 overflow-hidden border border-white/40">
+<div class="bg-primary h-full rounded-full w-[64%] shadow-sm"></div>
+</div>
+</div>
+<!-- Meesho -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-2">
+<img class="w-5 h-5 grayscale opacity-50" data-alt="A minimalist, monochromatic black and white Meesho logo on a light background. The style is clean and corporate, maintaining the premium Executive Intelligence aesthetic of data density and professional clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtJ43woUY5Hn1jDDRYUtQNrp7vVWW9CXMyZPsCKVzIghL4VnUQS0NV8rRgZo5Pe81wItE-eBN5uNmHAw_RrxYA5EA61SwQqynuo9plRGW8OX9mkN7vDKrEtCAtADqmxZfkJpZX3RvdExv0sdqdv-F35mK-3J6_BjGssNy-J8VLEShxG4d-btjNaDQBk3pZQ389XXKg0wPC74ZJNzLVlNmjvF8DrJotQEdaTgCwETewMQvGXz0XYmR9aM-rq9CNyCYDkwq7xtUxIy0"/> Meesho
+                                </span>
+<span class="font-label-md text-label-md text-on-tertiary-container">-2%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-3 overflow-hidden border border-white/40">
+<div class="bg-on-tertiary-container h-full rounded-full w-[45%] shadow-sm"></div>
+</div>
+</div>
+<!-- Myntra -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-2">
+<img class="w-5 h-5 grayscale opacity-50" data-alt="A minimalist, monochromatic black and white Myntra logo on a light background. The style is clean and corporate, maintaining the premium Executive Intelligence aesthetic of data density and professional clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVchguI26uB7D0gojsySHug97JgbeY7Ldjl6uQvaqdDOlkvC5wlk8Uh6hPuf4H9cO3H63jwEJIoLxSomrsbojdI3tPDC78Ct1frYmIgxpsY8uxYUChyMv81yU19WlGrV1taE4WGU7KwtyMJkRMAvoslhco3s_Dlic6PwtJWKXrCoYy0ZkK5Af-9oO4vm8a92qPC84OjJSYggNy1UiKaco6-Yfigl2nP2UpmT2kgBc23PXeVS8uw-cT66oeHS_tb0WqNFq-z1B33Pg"/> Myntra
+                                </span>
+<span class="font-label-md text-label-md text-secondary">+8%</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-3 overflow-hidden border border-white/40">
+<div class="bg-secondary h-full rounded-full w-[76%] shadow-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Latest Reviews Feed -->
+<div class="bg-surface-container-lowest p-container-padding rounded-[16px] neumorphic-card border border-white/50">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Latest Reviews Feed</h3>
+<div class="space-y-4 max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
+<!-- Review Item -->
+<div class="p-gutter bg-surface-container-low rounded-xl border border-white/20 hover:border-primary/20 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold">JD</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">John Doe</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">2 hours ago • Amazon</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full font-label-sm text-label-sm">Positive</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant italic">"The delivery was exceptionally fast and the packaging was robust. High quality product that exceeded expectations. Will definitely order again."</p>
+</div>
+<!-- Review Item -->
+<div class="p-gutter bg-surface-container-low rounded-xl border border-white/20 hover:border-primary/20 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary font-bold">AS</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Ananya S.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">5 hours ago • Flipkart</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full font-label-sm text-label-sm">Neutral</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant italic">"Good value for money, but the size was slightly different from the charts provided. Customer service was helpful in processing the exchange."</p>
+</div>
+<!-- Review Item -->
+<div class="p-gutter bg-surface-container-low rounded-xl border border-white/20 hover:border-primary/20 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center text-error font-bold">MK</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Michael K.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">1 day ago • Myntra</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-error-container text-on-error-container rounded-full font-label-sm text-label-sm">Negative</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant italic">"Extremely disappointed with the late shipment. Reached out multiple times but response was delayed. The product is fine but the experience was poor."</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sentiment Lexicon (Right) -->
+<div class="col-span-12 lg:col-span-4 space-y-card-gap">
+<!-- Word Cloud Card -->
+<div class="bg-surface-container-lowest p-container-padding rounded-[16px] neumorphic-card border border-white/50 h-full min-h-[400px]">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Lexicon Cloud</h3>
+<p class="text-on-surface-variant font-label-md text-label-md mb-8">Most frequent terms in customer feedback.</p>
+<div class="flex flex-wrap gap-4 justify-center items-center">
+<span class="word-cloud-item text-display-xl font-bold text-primary cursor-default">Quality</span>
+<span class="word-cloud-item text-headline-lg font-semibold text-secondary cursor-default">Fast Delivery</span>
+<span class="word-cloud-item text-headline-md font-medium text-on-surface-variant cursor-default">Packaging</span>
+<span class="word-cloud-item text-title-lg font-bold text-on-tertiary-container cursor-default">Delayed</span>
+<span class="word-cloud-item text-body-lg font-normal text-on-surface opacity-60 cursor-default">Pricing</span>
+<span class="word-cloud-item text-headline-md font-semibold text-primary cursor-default">Support</span>
+<span class="word-cloud-item text-title-lg font-medium text-secondary cursor-default">User Interface</span>
+<span class="word-cloud-item text-body-md font-light text-on-surface-variant cursor-default">Mobile App</span>
+<span class="word-cloud-item text-headline-lg font-bold text-on-primary-container cursor-default">Reliable</span>
+<span class="word-cloud-item text-title-lg font-normal text-error cursor-default">Refund</span>
+<span class="word-cloud-item text-headline-md font-medium text-secondary cursor-default">Efficient</span>
+<span class="word-cloud-item text-body-lg font-bold text-primary cursor-default">Design</span>
+</div>
+<div class="mt-12 pt-8 border-t border-surface-container">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-md text-label-md text-on-surface">Top Rising Keyword</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded">+45%</span>
+</div>
+<div class="bg-surface-container-low p-gutter rounded-xl">
+<h4 class="font-title-lg text-title-lg text-on-surface mb-1">"Eco-friendly"</h4>
+<p class="text-on-surface-variant font-label-sm text-label-sm">Rising mention in Amazon &amp; Myntra packaging reviews.</p>
+</div>
+</div>
+</div>
+<!-- Emotional Distribution -->
+<div class="bg-surface-container-lowest p-container-padding rounded-[16px] neumorphic-card border border-white/50">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-6">Sentiment Pulse</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-12 text-on-surface-variant font-label-sm text-label-sm">Joy</div>
+<div class="flex-grow bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary w-[70%] h-full"></div>
+</div>
+<div class="w-8 text-on-surface font-label-sm text-label-sm">70%</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 text-on-surface-variant font-label-sm text-label-sm">Trust</div>
+<div class="flex-grow bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary w-[85%] h-full"></div>
+</div>
+<div class="w-8 text-on-surface font-label-sm text-label-sm">85%</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 text-on-surface-variant font-label-sm text-label-sm">Anger</div>
+<div class="flex-grow bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-error w-[12%] h-full"></div>
+</div>
+<div class="w-8 text-on-surface font-label-sm text-label-sm">12%</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 text-on-surface-variant font-label-sm text-label-sm">Neutral</div>
+<div class="flex-grow bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-on-surface-variant w-[25%] h-full"></div>
+</div>
+<div class="w-8 text-on-surface font-label-sm text-label-sm">25%</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Note -->
+<footer class="mt-section-margin text-center pb-gutter">
+<p class="text-on-surface-variant font-label-sm text-label-sm opacity-50">Data synchronized as of Oct 24, 2023, 14:00 GMT. Intelligence powered by Core AI Pipeline.</p>
+</footer>
+</main>
+<!-- FAB for Contextual Action (Suppressed as per rules for detailed screen, but adding for interaction showcase if it was home) -->
+<!-- Rule says: suppress on Details/Settings. This is a tracker dashboard, keeping it hidden to focus on data density. -->
+<script>
+        // Simple Micro-interaction for cards
+        document.querySelectorAll('.neumorphic-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+                card.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0px)';
+            });
+        });
+
+        // Search Bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-105');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-105');
+        });
+    </script>
+</body></html>

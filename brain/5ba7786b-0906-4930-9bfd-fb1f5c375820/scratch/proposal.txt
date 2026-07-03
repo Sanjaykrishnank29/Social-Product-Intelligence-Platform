@@ -1,0 +1,197 @@
+Social Products — Company & Product Intelligence
+A Social Listening and Product Intelligence Module for Competitive Market Insights
+1.  Executive Summary
+In a hyper-competitive market landscape, businesses that understand how customers perceive their products — and how they compare with rivals — hold a decisive strategic advantage. Social media platforms, app stores, and review communities generate millions of data points every day that capture authentic public sentiment about companies and products. Yet most 
+organisations
+ lack the infrastructure to systematically harvest and interpret these signals at scale.
+This project proposes the design and implementation of a Social Products — Company & Product Intelligence module: a social listening and product intelligence platform that aggregates company-level and product-level signals from social platforms, review sources, and community forums. The system will produce ranked competitive intelligence dashboards, sentiment-scored product reports, and real-time alert feeds, enabling stakeholders to make informed decisions about product positioning, marketing, and feature 
+development.
+2.  Problem Statement
+Consumer opinions are scattered across dozens of digital touchpoints — Twitter/X, Reddit, LinkedIn, Google Play, App Store, Amazon, G2, Trustpilot, and niche forums. The volume, velocity, and variety of this unstructured text data far 
+exceeds
+ what any manual team can process. As a result, 
+organisations
+ miss emerging product issues, fail to track competitive repositioning in real time, and react to market shifts only after damage has been done.
+Specific pain points this project addresses:
+No unified view of brand health across multiple social and review channels
+Inability to compare product perception against direct competitors in real time
+Trending feature requests and pain points buried within thousands of unstructured reviews
+Delayed response to sudden spikes in negative sentiment — reputational damage compounds
+Manual analyst effort required to compile weekly competitive intelligence reports
+This framework directly addresses the gap by automating the aggregation, analysis, scoring, and 
+visualisation
+ of company and product intelligence from the social web.
+3.  Project Objectives
+Monitor and collect social media mentions of target companies and their products across major platforms.
+Aggregate review signals from app stores, e-commerce platforms, and SaaS review sites.
+Apply Natural Language Processing (NLP) to compute sentiment scores at company and product levels.
+Rank companies and products by sentiment score, mention volume, and engagement metrics.
+Identify trending features, pain points, and innovation opportunities from product reviews.
+Benchmark product perception against direct competitors using comparative analytics.
+Deliver a real-time alerting system for sudden sentiment shifts or viral mentions.
+Produce a weekly aggregated intelligence dashboard and automated report for stakeholders.
+4.  Scope of the Project
+4.1  In
+ Scope
+Social media mention tracking (Twitter/X, Reddit, LinkedIn public data)
+Review aggregation from Google Play, Apple App Store, G2, Trustpilot, Amazon
+NLP-based sentiment analysis (positive / negative / neutral classification)
+Aspect-based sentiment analysis (ABSA) to detect feature-level opinions
+Competitive benchmarking dashboard comparing up to 10 companies/products
+Trending topic extraction from review corpora using keyword and phrase mining
+Real-time alerting for spikes exceeding configurable thresholds
+Weekly automated report generation (PDF / HTML export)
+4.2  Out
+ of Scope
+Paid social media advertising analysis or ad performance tracking
+Internal CRM or customer support ticket analysis
+Deep fake / bot detection in social posts
+Multilingual support beyond English in the initial release
+Legal or compliance screening of collected content
+5.  Key Components and System Architecture
+5.1  Module
+ A — Social Product Monitoring
+The monitoring sub-module continuously ingests social media mentions and maps them to specific companies and products. It uses keyword and entity matching against a configurable watchlist, then channels the data into the central analytics pipeline.
+Mention Collection: 
+Scheduled crawlers and API connectors fetch posts, tweets, and threads matching company or product keywords
+Review Aggregation: 
+Scraping and API adapters pull structured ratings and text reviews from app stores and review platforms
+Volume Tracking: 
+Time-series counts of mentions and reviews per entity per platform — used for trend analysis and anomaly detection
+Company & Product Ranking: 
+Entities scored and ranked by weighted composite of sentiment score and mention volume
+5.2  Module
+ B — Product Review Analysis
+The review analysis sub-module processes collected review text through an NLP pipeline to extract granular insights about product perception.
+Sentiment Classification: 
+Pre-trained transformer models (BERT / 
+RoBERTa
+) classify each review as positive, negative, or neutral
+Aspect-Based Sentiment Analysis: 
+Fine-grained extraction of opinions about specific product features (UI, performance, pricing, support)
+Trending Feature Detection: 
+TF-IDF and LDA topic modelling identify frequently mentioned product attributes over rolling time windows
+Pain Point Identification: 
+Negative review clustering reveals recurring issues, enabling product teams to 
+prioritise
+ fixes
+Competitor Benchmarking: 
+Side-by-side sentiment score comparison and feature gap analysis against rival products
+5.3  Intelligence
+ Dashboard and Alerts
+A web-based dashboard consolidates all analytical outputs into actionable intelligence views. The alert engine monitors for threshold breaches and dispatches notifications in real time.
+6.  Data Sources
+Source Type
+Platforms / Channels
+Data Format
+Access Method
+Social Media
+Twitter/X, Reddit, LinkedIn
+JSON / XML
+Official APIs / RSS
+App Store Reviews
+Google Play, Apple App Store
+JSON / HTML
+API + Web Scraping
+SaaS Reviews
+G2, Trustpilot, Capterra
+HTML / CSV
+Web Scraping
+E-Commerce
+Amazon, Flipkart
+HTML / JSON
+Web Scraping / API
+News & Blogs
+Google News, RSS feeds, Tech blogs
+RSS / HTML
+RSS Parsers
+Community Forums
+Reddit threads, Quora, Stack Overflow
+JSON / HTML
+Official API / Scrape
+7.  Proposed Technology Stack
+Layer
+Technology / Tool
+Purpose
+Language
+Python 3.10+
+Core pipeline and NLP processing
+NLP / ML
+HuggingFace
+ Transformers, NLTK, 
+spaCy
+Sentiment classification, entity extraction
+Topic Modelling
+Gensim
+ LDA, scikit-learn TF-IDF
+Trending feature and pain point detection
+Data Collection
+Tweepy
+, PRAW, 
+BeautifulSoup
+, Scrapy
+API connectors and web scrapers
+Database
+PostgreSQL + Elasticsearch
+Structured storage and full-text search
+Orchestration
+Apache Airflow
+Scheduling ingestion and analysis DAGs
+Dashboard
+Streamlit
+ / Dash / Power BI
+Interactive intelligence dashboard
+Alerting
+Python 
+smtplib
+ / Slack Webhooks
+Real-time spike and threshold alerts
+Version Control
+Git / GitHub
+Source code management
+Report Generation
+ReportLab
+ / Jinja2 HTML Templates
+Weekly PDF and HTML intelligence reports
+8.  NLP Processing Pipeline
+The core intelligence engine is an NLP pipeline that transforms raw, unstructured social and review text into structured, quantified signals. The pipeline runs in sequential stages:
+Step
+Stage
+Description
+Output
+1
+Data Ingestion
+Raw text collected from APIs, scrapers, and RSS feeds
+Raw records in staging DB
+2
+Pre-processing
+Noise removal, tokenization, stop-word filtering, lemmatization
+Clean token sequences
+3
+Entity Recognition
+Named Entity Recognition (NER) to tag company and product mentions
+Entity-labelled text
+4
+Sentiment Scoring
+BERT/
+RoBERTa
+ fine-tuned model classifies overall sentiment
+Sentiment label + confidence %
+5
+Aspect Extraction
+ABSA 
+extracts
+ opinion triplets: (aspect, opinion, sentiment)
+Aspect-sentiment pairs
+6
+Topic Modelling
+LDA and TF-IDF identify trending themes in rolling 7-day window
+Topic clusters with weights
+7
+Aggregation
+Scores aggregated per entity per source per time period
+Composite DQ-passed score table
+8
+Output & Alerting
+Dashboard refresh + threshold check + alert dispatch
+Dashboard data + alert events

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Catalog Management | Executive Intelligence</title>
+<!-- Google Fonts: Outfit -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#191c1e",
+                    "on-secondary-container": "#00714d",
+                    "background": "#f7f9fb",
+                    "on-error-container": "#93000a",
+                    "inverse-surface": "#2d3133",
+                    "tertiary": "#000000",
+                    "on-error": "#ffffff",
+                    "outline": "#76777d",
+                    "tertiary-fixed": "#ffdad3",
+                    "on-surface-variant": "#45464d",
+                    "on-secondary-fixed": "#002113",
+                    "surface-variant": "#e0e3e5",
+                    "tertiary-container": "#3e0500",
+                    "surface": "#f7f9fb",
+                    "secondary-fixed-dim": "#4edea3",
+                    "primary-fixed": "#dae2fd",
+                    "on-tertiary-container": "#cf644e",
+                    "on-secondary-fixed-variant": "#005236",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#bec6e0",
+                    "secondary": "#006c49",
+                    "secondary-container": "#6cf8bb",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#d8dadc",
+                    "surface-tint": "#565e74",
+                    "primary": "#000000",
+                    "surface-container-high": "#e6e8ea",
+                    "primary-container": "#131b2e",
+                    "on-tertiary-fixed": "#3e0500",
+                    "on-primary-fixed": "#131b2e",
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "surface-container-low": "#f2f4f6",
+                    "outline-variant": "#c6c6cd",
+                    "primary-fixed-dim": "#bec6e0",
+                    "surface-container-highest": "#e0e3e5",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "surface-container": "#eceef0",
+                    "on-primary-container": "#7c839b",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "gutter": "24px",
+                    "container-padding": "32px",
+                    "card-gap": "24px",
+                    "section-margin": "48px"
+            },
+            "fontFamily": {
+                    "body-md": ["Outfit"],
+                    "label-md": ["Outfit"],
+                    "headline-lg": ["Outfit"],
+                    "display-xl": ["Outfit"],
+                    "label-sm": ["Outfit"],
+                    "title-lg": ["Outfit"],
+                    "headline-md": ["Outfit"],
+                    "body-lg": ["Outfit"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .aurora-bg {
+        background: radial-gradient(circle at 0% 0%, #e0e7ff 0%, transparent 50%),
+                    radial-gradient(circle at 100% 0%, #f0f9ff 0%, transparent 50%),
+                    radial-gradient(circle at 100% 100%, #dcfce7 0%, transparent 50%),
+                    radial-gradient(circle at 0% 100%, #fef3c7 0%, transparent 50%);
+        background-color: #f7f9fb;
+      }
+      .glass-nav {
+        backdrop-filter: blur(24px);
+        border-right: 1px solid rgba(255, 255, 255, 0.4);
+      }
+      .glass-top {
+        backdrop-filter: blur(32px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+      }
+      .neumorphic-inset {
+        box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05), inset -2px -2px 5px rgba(255,255,255,0.8);
+      }
+      .neumorphic-button {
+        box-shadow: 4px 4px 10px rgba(0,0,0,0.05), -4px -4px 10px rgba(255,255,255,0.8);
+        transition: all 0.2s ease;
+      }
+      .neumorphic-button:active {
+        box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05), inset -2px -2px 5px rgba(255,255,255,0.8);
+        transform: scale(0.98);
+      }
+      .floating-card {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+</head>
+<body class="aurora-bg font-body-md text-on-surface min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-72 fixed left-0 top-0 z-50 glass-nav flex flex-col py-8 px-4 bg-surface/30">
+<div class="mb-10 px-4">
+<h1 class="font-headline-md text-headline-md font-extrabold text-on-surface">Executive Intelligence</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Market Insights</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-white/10 rounded-full px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Pricing Dashboard</span>
+</a>
+<a class="flex items-center gap-3 bg-primary text-on-primary rounded-full px-4 py-3 shadow-md transition-all active:translate-x-1" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-label-md text-label-md">Catalog Management</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-white/10 rounded-full px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Sentiment Tracker</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-white/10 rounded-full px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined">compare_arrows</span>
+<span class="font-label-md text-label-md">Platform Comparison</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-white/10 rounded-full px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-white/10 rounded-full px-4 py-3 transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<main class="pl-72 min-h-screen">
+<!-- TopNavBar -->
+<header class="w-full h-16 sticky top-0 z-40 glass-top bg-surface/40 flex justify-between items-center px-gutter shadow-sm">
+<div class="flex items-center gap-4 flex-1">
+<div class="neumorphic-inset bg-surface-container-low rounded-full px-4 py-2 flex items-center gap-2 w-96">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-md w-full" placeholder="Search catalog items..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="neumorphic-button p-2 rounded-full bg-surface">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<button class="neumorphic-button p-2 rounded-full bg-surface">
+<span class="material-symbols-outlined text-primary">settings</span>
+</button>
+<div class="flex items-center gap-3 ml-4">
+<div class="text-right">
+<p class="font-label-md text-label-md leading-tight">Sarah Jenkins</p>
+<p class="text-xs text-on-surface-variant">Lead Merchandiser</p>
+</div>
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover border-2 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN44rOWsu-Mn389nJkt8ifHy5Qk7JeDCeeesA3sOWwbY2jUe-98ksM4vDLjTD7MRGjtTDNcSd32A1wIaye2OPW6QIQaJ1Jd27gI68di-HbWlYfIRy8Q3kBuEenU8bhmDFsVdAyhc4hVcuaZPGZQN31ivE1D2PQYHXZfP4HW98081XyYu8jNu_qJrj06d-dZq5Fh3w1XHlK3WRHXkPnDuojoBF8l_xpUrL9hDZjthw7Ui-SblkWn_zcuPeQPcryXihAOpXZt5i6Wq8"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-container-padding space-y-section-margin">
+<!-- Page Header -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Catalog Intelligence</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Unified inventory across multi-channel distribution.</p>
+</div>
+<div class="flex gap-4">
+<button class="neumorphic-button bg-surface text-primary px-6 py-2.5 rounded-full font-label-md text-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span>
+                        Export Report
+                    </button>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-md text-label-md flex items-center gap-2 shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">add</span>
+                        New SKU
+                    </button>
+</div>
+</div>
+<!-- Bento High-Level Summary -->
+<div class="grid grid-cols-12 gap-card-gap">
+<!-- Total SKUs Card -->
+<div class="col-span-3 bg-white rounded-2xl p-6 floating-card flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl">inventory_2</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total SKUs</p>
+<h3 class="font-display-xl text-display-xl text-primary mt-2">42,891</h3>
+</div>
+<div class="mt-4 flex items-center gap-2 text-on-secondary-container">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-sm font-semibold">+12% vs last month</span>
+</div>
+</div>
+<!-- Active Listings -->
+<div class="col-span-3 bg-white rounded-2xl p-6 floating-card flex flex-col justify-between">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Active Listings</p>
+<h3 class="font-display-xl text-display-xl text-primary mt-2">128.4k</h3>
+</div>
+<div class="mt-4 flex items-center gap-2 text-on-secondary-container bg-secondary-container/30 px-3 py-1 rounded-full w-fit">
+<span class="text-xs font-bold">98.2% Platform Sync</span>
+</div>
+</div>
+<!-- Category Distribution -->
+<div class="col-span-6 bg-white rounded-2xl p-6 floating-card relative overflow-hidden">
+<h4 class="font-title-lg text-title-lg mb-6">Category Distribution</h4>
+<div class="flex gap-4 h-32 items-end">
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container rounded-t-lg transition-all duration-700 h-[85%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">Apparel</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/60 rounded-t-lg transition-all duration-700 h-[60%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">Footwear</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/40 rounded-t-lg transition-all duration-700 h-[45%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">Home</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/30 rounded-t-lg transition-all duration-700 h-[25%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">Beauty</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full bg-primary-container/10 rounded-t-lg transition-all duration-700 h-[15%]"></div>
+<span class="text-[10px] font-bold text-on-surface-variant">Other</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Platform Depth Table -->
+<div class="bg-white rounded-2xl p-gutter floating-card">
+<div class="flex justify-between items-center mb-8">
+<h4 class="font-headline-md text-headline-md text-primary">Catalog Depth Analysis</h4>
+<div class="flex gap-2">
+<div class="px-4 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 border border-blue-200">Amazon</div>
+<div class="px-4 py-1 rounded-full text-xs font-bold bg-yellow-100 text-yellow-700 border border-yellow-200">Flipkart</div>
+<div class="px-4 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-700 border border-purple-200">Meesho</div>
+<div class="px-4 py-1 rounded-full text-xs font-bold bg-pink-100 text-pink-700 border border-pink-200">Myntra</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full">
+<thead>
+<tr class="text-left border-b border-surface-variant">
+<th class="pb-4 font-label-md text-label-md text-on-surface-variant uppercase">Category Group</th>
+<th class="pb-4 font-label-md text-label-md text-on-surface-variant uppercase text-center">Amazon</th>
+<th class="pb-4 font-label-md text-label-md text-on-surface-variant uppercase text-center">Flipkart</th>
+<th class="pb-4 font-label-md text-label-md text-on-surface-variant uppercase text-center">Meesho</th>
+<th class="pb-4 font-label-md text-label-md text-on-surface-variant uppercase text-center">Myntra</th>
+<th class="pb-4 font-label-md text-label-md text-on-surface-variant uppercase text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-5 font-label-md text-label-md">Men's Premium Denim</td>
+<td class="py-5 text-center text-body-md">1,240</td>
+<td class="py-5 text-center text-body-md">1,180</td>
+<td class="py-5 text-center text-body-md text-error">420</td>
+<td class="py-5 text-center text-body-md">1,310</td>
+<td class="py-5 text-right">
+<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold">OPTIMIZED</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-5 font-label-md text-label-md">Winter Outerwear</td>
+<td class="py-5 text-center text-body-md">850</td>
+<td class="py-5 text-center text-body-md">920</td>
+<td class="py-5 text-center text-body-md">1,100</td>
+<td class="py-5 text-center text-body-md">840</td>
+<td class="py-5 text-right">
+<span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-[10px] font-bold">SYNCING</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-5 font-label-md text-label-md">Ethic Wear (Fusion)</td>
+<td class="py-5 text-center text-body-md">2,400</td>
+<td class="py-5 text-center text-body-md">2,850</td>
+<td class="py-5 text-center text-body-md">3,200</td>
+<td class="py-5 text-center text-body-md">2,100</td>
+<td class="py-5 text-right">
+<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[10px] font-bold">OPTIMIZED</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-5 font-label-md text-label-md">Kids Activewear</td>
+<td class="py-5 text-center text-body-md">640</td>
+<td class="py-5 text-center text-body-md">580</td>
+<td class="py-5 text-center text-body-md">210</td>
+<td class="py-5 text-center text-body-md">720</td>
+<td class="py-5 text-right">
+<span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-[10px] font-bold">LOW STOCK</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Logistics Reach Visualization -->
+<div class="grid grid-cols-12 gap-card-gap">
+<!-- Map Section -->
+<div class="col-span-8 bg-white rounded-2xl p-gutter floating-card overflow-hidden">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h4 class="font-headline-md text-headline-md text-primary">Logistics Reach</h4>
+<p class="text-on-surface-variant text-body-md">Current pincode coverage efficiency across India.</p>
+</div>
+<div class="text-right">
+<p class="text-4xl font-bold text-primary">18,490</p>
+<p class="text-xs font-bold text-on-secondary-container">Active Pincodes</p>
+</div>
+</div>
+<div class="relative h-96 rounded-xl overflow-hidden bg-slate-100">
+<!-- Simulated Map Visualization -->
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 grayscale" data-alt="A stylized, clean, minimalist map of India showing logistics distribution. The map is presented in a modern UI style with soft glowing nodes in deep indigo and vibrant teal highlighting major shipping hubs. The aesthetic is high-key and professional with a white and soft grey color palette, reflecting a sophisticated logistics intelligence dashboard." data-location="India" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdGJyfsuAoF1PgaHZRyHIYQgFq72ZzB1uQ-Nny2BwWsPYNe5gnImvief8sVkH-O8rRgIgnPKSNEArnLQO-hyj7j-n6PehtYhO0sVmsn06oV6f1lxOo_atf9tqcwR1S4aME4Phqi20WcFlGWocHonbmc4nq8BhGmJWdNG_DVuosc31-YXbnJcB6jCSBh6nuwNdbppjN9yXUQHR0cg-BZ_-FXVzMfcHuS6fO4OsQmSUNJS6_hSOpMiGzFGqvUkhywZlLFK_A9tSdXoI"/>
+</div>
+<!-- UI Overlay on Map -->
+<div class="absolute inset-0 p-6 flex flex-col justify-end pointer-events-none">
+<div class="bg-white/80 backdrop-blur-md p-4 rounded-xl border border-white/40 shadow-xl max-w-xs pointer-events-auto">
+<p class="font-label-md text-label-md text-primary">Regional Hotspot</p>
+<p class="text-xs text-on-surface-variant mb-3">NCR - Mumbai Corridor</p>
+<div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[94%]"></div>
+</div>
+<p class="text-[10px] mt-1 font-bold">94% Fulfillment Rate</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Logistics Stats -->
+<div class="col-span-4 space-y-card-gap">
+<div class="bg-white rounded-2xl p-6 floating-card">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-4">Avg. Dispatch Time</p>
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-extrabold text-primary">1.2</span>
+<span class="text-xl font-bold text-on-surface-variant">Days</span>
+</div>
+<p class="text-xs text-on-secondary-container mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">keyboard_arrow_up</span>
+                            8% faster than Q3
+                        </p>
+</div>
+<div class="bg-white rounded-2xl p-6 floating-card">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-4">Fulfillment Partners</p>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-sm font-bold">BlueDart</span>
+<span class="text-sm font-bold text-on-secondary-container">98%</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full w-[98%]"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm font-bold">Delhivery</span>
+<span class="text-sm font-bold text-on-secondary-container">92%</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full w-[92%]"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-sm font-bold">Ecom Express</span>
+<span class="text-sm font-bold text-on-tertiary-container">76%</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-orange-400 h-full w-[76%]"></div>
+</div>
+</div>
+</div>
+<button class="w-full bg-surface-container-highest border border-white/40 neumorphic-button py-4 rounded-2xl font-bold text-primary flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">map</span>
+                        View Full Pincode Master
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.querySelectorAll('.floating-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+                card.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Simple pulse effect for map nodes (if we had canvas/svg)
+        // Can be simulated with JS intervals on UI elements
+    </script>
+</body></html>

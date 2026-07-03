@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Platform Comparison | Executive Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#191c1e",
+                    "on-secondary-container": "#00714d",
+                    "background": "#f7f9fb",
+                    "on-error-container": "#93000a",
+                    "inverse-surface": "#2d3133",
+                    "tertiary": "#000000",
+                    "on-error": "#ffffff",
+                    "outline": "#76777d",
+                    "tertiary-fixed": "#ffdad3",
+                    "on-surface-variant": "#45464d",
+                    "on-secondary-fixed": "#002113",
+                    "surface-variant": "#e0e3e5",
+                    "tertiary-container": "#3e0500",
+                    "surface": "#f7f9fb",
+                    "secondary-fixed-dim": "#4edea3",
+                    "primary-fixed": "#dae2fd",
+                    "on-tertiary-container": "#cf644e",
+                    "on-secondary-fixed-variant": "#005236",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary-fixed-variant": "#802918",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#bec6e0",
+                    "secondary": "#006c49",
+                    "secondary-container": "#6cf8bb",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#d8dadc",
+                    "surface-tint": "#565e74",
+                    "primary": "#000000",
+                    "surface-container-high": "#e6e8ea",
+                    "primary-container": "#131b2e",
+                    "on-tertiary-fixed": "#3e0500",
+                    "on-primary-fixed": "#131b2e",
+                    "tertiary-fixed-dim": "#ffb4a5",
+                    "surface-container-low": "#f2f4f6",
+                    "outline-variant": "#c6c6cd",
+                    "primary-fixed-dim": "#bec6e0",
+                    "surface-container-highest": "#e0e3e5",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "surface-container": "#eceef0",
+                    "on-primary-container": "#7c839b",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "gutter": "24px",
+                    "container-padding": "32px",
+                    "card-gap": "24px",
+                    "section-margin": "48px"
+            },
+            "fontFamily": {
+                    "body-md": ["Outfit"],
+                    "label-md": ["Outfit"],
+                    "headline-lg": ["Outfit"],
+                    "display-xl": ["Outfit"],
+                    "label-sm": ["Outfit"],
+                    "title-lg": ["Outfit"],
+                    "headline-md": ["Outfit"],
+                    "body-lg": ["Outfit"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500"}],
+                    "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f7f9fb;
+            overflow-x: hidden;
+        }
+
+        .aurora-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 30%, rgba(218, 226, 253, 0.4) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(111, 251, 190, 0.2) 0%, transparent 40%),
+                        radial-gradient(circle at 50% 50%, rgba(255, 218, 211, 0.1) 0%, transparent 50%);
+            filter: blur(80px);
+        }
+
+        .neumorphic-button {
+            background: #ffffff;
+            box-shadow: 4px 4px 10px rgba(203, 213, 225, 0.5), -4px -4px 10px rgba(255, 255, 255, 0.8);
+            transition: all 0.2s ease;
+        }
+
+        .neumorphic-button:active {
+            box-shadow: inset 2px 2px 5px rgba(203, 213, 225, 0.5), inset -2px -2px 5px rgba(255, 255, 255, 0.8);
+            transform: scale(0.98);
+        }
+
+        .inset-neumorphic {
+            box-shadow: inset 4px 4px 8px rgba(203, 213, 225, 0.5), inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+        }
+
+        .glass-nav {
+            backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .glass-sidebar {
+            backdrop-filter: blur(24px);
+            border-right: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<div class="aurora-bg"></div>
+<!-- Navigation Shell -->
+<nav class="glass-nav w-full h-16 sticky top-0 z-40 bg-surface/40 flex justify-between items-center px-container-padding shadow-sm">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Executive Intelligence</span>
+<div class="hidden md:flex gap-6 ml-8">
+<a class="text-primary font-bold border-b-2 border-primary transition-colors duration-200 py-1" href="#">Platform Comparison</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 py-1" href="#">Market Insights</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface/30 border-none rounded-full w-64 focus:ring-2 focus:ring-primary transition-all text-sm inset-neumorphic" placeholder="Search insights..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img alt="User" data-alt="A clean, professional studio headshot of a business executive in a high-key lighting setup. The person is wearing a tailored charcoal suit and has a neutral, confident expression. The background is a soft, blurred corporate environment with a palette of cool grays and muted blues to match the premium Executive Intelligence design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2rflhcPt-53GH0982gibLGncdFV88mCmxuqKiZXT39fJUzdh2oKsSrHguL8yOro1FAvW3rNet-MpNWsDuuxQJsJl81fdnAvCcndZqJLH56c2uIf26AqRRo-XupSSuxPSutTcPtv6T223ZOLh1JUOVvTZI43PYMBuio4b-WrdQYoD1BILAj95WVmIpYh7kkvrG5mfB-2SwRGcvCDCPWioU6xKI3a01lTdyu5bfiaLQ3jQE3saxwkuR0PXACQGBxxy2EbbJJi1YtRs"/>
+</div>
+</div>
+</nav>
+<div class="flex">
+<!-- Sidebar -->
+<aside class="glass-sidebar h-[calc(100vh-64px)] w-72 sticky top-16 hidden md:flex flex-col py-8 px-4 bg-surface/30">
+<div class="mb-8 px-4">
+<p class="text-label-sm uppercase tracking-widest text-on-surface-variant mb-4">Core Analysis</p>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 rounded-full hover:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md">Pricing Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 rounded-full hover:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-label-md">Catalog Management</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 rounded-full hover:bg-white/10 transition-all duration-300" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md">Sentiment Tracker</span>
+</a>
+<a class="flex items-center gap-3 bg-primary text-on-primary rounded-full px-4 py-3 shadow-md active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">compare_arrows</span>
+<span class="font-label-md">Platform Comparison</span>
+</a>
+</div>
+</div>
+<div class="mt-auto px-4">
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface px-4 py-3 rounded-full transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-container-padding max-w-[1400px] mx-auto">
+<!-- Header Section -->
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-display-xl text-display-xl mb-2">Platform Benchmarking</h1>
+<p class="text-body-lg text-on-surface-variant">Real-time comparison of market leaders across the Indian E-commerce ecosystem.</p>
+</div>
+<div class="flex gap-4">
+<button class="neumorphic-button px-6 py-3 rounded-full font-label-md flex items-center gap-2">
+<span class="material-symbols-outlined">filter_list</span>
+                        Last 30 Days
+                    </button>
+<button class="neumorphic-button px-6 py-3 rounded-full font-label-md flex items-center gap-2 bg-primary text-on-primary">
+<span class="material-symbols-outlined">download</span>
+                        Export Report
+                    </button>
+</div>
+</header>
+<!-- Key Metrics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-card-gap mb-section-margin">
+<!-- Market Share -->
+<div class="bg-white rounded-xl p-6 card-shadow border border-white/50 relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 rounded-lg bg-primary-container text-on-primary-container material-symbols-outlined">pie_chart</span>
+<span class="text-secondary font-bold flex items-center text-sm">+2.4% <span class="material-symbols-outlined text-xs">trending_up</span></span>
+</div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Market Share Leader</p>
+<h3 class="font-headline-md text-headline-md mb-2">Amazon</h3>
+<div class="text-display-xl font-bold">38.2%</div>
+</div>
+<!-- Avg Order Value -->
+<div class="bg-white rounded-xl p-6 card-shadow border border-white/50">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 rounded-lg bg-surface-container text-on-surface-variant material-symbols-outlined">shopping_bag</span>
+<span class="text-error font-bold flex items-center text-sm">-1.2% <span class="material-symbols-outlined text-xs">trending_down</span></span>
+</div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Avg Order Value</p>
+<h3 class="font-headline-md text-headline-md mb-2">Myntra</h3>
+<div class="text-display-xl font-bold">₹2,840</div>
+</div>
+<!-- Retention Rate -->
+<div class="bg-white rounded-xl p-6 card-shadow border border-white/50">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 rounded-lg bg-surface-container text-on-surface-variant material-symbols-outlined">group</span>
+<span class="text-secondary font-bold flex items-center text-sm">+5.1% <span class="material-symbols-outlined text-xs">trending_up</span></span>
+</div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Retention Rate</p>
+<h3 class="font-headline-md text-headline-md mb-2">Flipkart</h3>
+<div class="text-display-xl font-bold">64.5%</div>
+</div>
+<!-- Order Growth -->
+<div class="bg-white rounded-xl p-6 card-shadow border border-white/50">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 rounded-lg bg-secondary-container text-on-secondary-container material-symbols-outlined">bolt</span>
+<span class="text-secondary font-bold flex items-center text-sm">+18% <span class="material-symbols-outlined text-xs">trending_up</span></span>
+</div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">High Growth Disruptor</p>
+<h3 class="font-headline-md text-headline-md mb-2">Meesho</h3>
+<div class="text-display-xl font-bold">2.4M/d</div>
+</div>
+</div>
+<!-- Comparison Matrix & Regional Map -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-card-gap mb-section-margin">
+<!-- Capability Matrix -->
+<div class="lg:col-span-2 bg-white rounded-xl p-8 card-shadow border border-white/50">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg">Capability Matrix</h2>
+<p class="text-on-surface-variant">Functional score across infrastructure pillars.</p>
+</div>
+<div class="flex gap-2">
+<div class="flex items-center gap-1 text-label-sm"><span class="w-3 h-3 rounded-full bg-secondary"></span> Leading</div>
+<div class="flex items-center gap-1 text-label-sm"><span class="w-3 h-3 rounded-full bg-tertiary-fixed-dim"></span> Lagging</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-surface-variant">
+<th class="pb-4 font-label-md text-on-surface-variant">Capabilities</th>
+<th class="pb-4 font-label-md text-center">Amazon</th>
+<th class="pb-4 font-label-md text-center">Flipkart</th>
+<th class="pb-4 font-label-md text-center">Meesho</th>
+<th class="pb-4 font-label-md text-center">Myntra</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant">
+<tr class="group hover:bg-surface-container-lowest/50 transition-colors">
+<td class="py-6 font-title-lg">Advertising Ecosystem</td>
+<td class="py-6 text-center">
+<div class="mx-auto w-12 h-12 rounded-full border-4 border-secondary flex items-center justify-center font-bold">9.8</div>
+</td>
+<td class="py-6 text-center">
+<div class="mx-auto w-12 h-12 rounded-full border-4 border-secondary/60 flex items-center justify-center font-bold">8.4</div>
+</td>
+<td class="py-6 text-center">
+<div class="mx-auto w-12 h-12 rounded-full border-4 border-error/40 flex items-center justify-center font-bold">4.2</div>
+</td>
+<td class="py-6 text-center">
+<div class="mx-auto w-12 h-12 rounded-full border-4 border-secondary/40 flex items-center justify-center font-bold">7.1</div>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-lowest/50 transition-colors">
+<td class="py-6 font-title-lg">Logistics &amp; Last Mile</td>
+<td class="py-6 text-center">
+<div class="mx-auto w-12 h-12 rounded-full border-4 border-secondary flex items-center justify-center font-bold">9.5</div>
+</td>
+<td class="py-6 text-center">
+<div class="mx-auto w-12 h-12 rounded-full border-4 border-secondary flex items-center justify-center font-bold">9.2</div>
+</td>
+<td class="py-6 text-center">
+<div class="mx-auto w-12 h-12 rounded-full border-4 border-secondary/40 flex items-center justify-center font-bold">6.8</div>
+</td>
+<td class="py-6 text-center">
+<div class="mx-auto w-12 h-12 rounded-full border-4 border-secondary/50 flex items-center justify-center font-bold">8.0</div>
+</td>
+</tr>
+<tr class="group hover:bg-surface-container-lowest/50 transition-colors">
+<td class="py-6 font-title-lg">Brand Protection</td>
+<td class="py-6 text-center">
+<div class="mx-auto w-12 h-12 rounded-full border-4 border-secondary flex items-center justify-center font-bold">9.9</div>
+</td>
+<td class="py-6 text-center">
+<div class="mx-auto w-12 h-12 rounded-full border-4 border-secondary/40 flex items-center justify-center font-bold">7.5</div>
+</td>
+<td class="py-6 text-center">
+<div class="mx-auto w-12 h-12 rounded-full border-4 border-error/60 flex items-center justify-center font-bold">3.1</div>
+</td>
+<td class="py-6 text-center">
+<div class="mx-auto w-12 h-12 rounded-full border-4 border-secondary flex items-center justify-center font-bold">9.4</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Regional Performance -->
+<div class="bg-white rounded-xl p-8 card-shadow border border-white/50 flex flex-col">
+<h2 class="font-headline-lg text-headline-lg mb-2">Regional Edge</h2>
+<p class="text-on-surface-variant mb-6">Dominance by Tier zones.</p>
+<div class="flex-1 relative min-h-[300px] mb-6 flex items-center justify-center bg-surface-container-lowest rounded-xl inset-neumorphic">
+<div class="text-center p-8">
+<span class="material-symbols-outlined text-6xl text-primary/10 mb-4">map</span>
+<p class="text-label-md text-on-surface-variant">Geospatial Distribution Map</p>
+<img alt="Map" class="mx-auto mt-4 opacity-80" data-alt="A stylized, minimalist heat map of India showing e-commerce penetration density. The map uses a sophisticated color gradient from light mint green to deep indigo to represent market intensity. Key metropolitan hubs like Mumbai, Bangalore, and Delhi are marked with subtle, glowing data points that radiate outward. The overall aesthetic is clean and analytical, matching the premium Executive Intelligence brand style." data-location="India" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9sSx0hJ3HQCwuptU28IKwzqPORUSqxn4KDNopaYAqUGImHH59-oyGE16u7fjGJofoDHISwvso0tJzbAqS3RYu_8kalGVFiTpV9lDSOgh9y-2QWBRoom1pzo4aT8KDlafAR7J4WylaWCufXx2Z6lcLhkv8iur6Ae0SY_-NsmwJS0lLNVDujqwLK_xQO_5T2d_J8kV3sICQmI9TJIUxBVxFjhMR6gpmcIV_OX2I5Ke9fSwVQQYP_znaUJZS3SNWVm2URc4uGc55kLg"/>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-label-md">Tier 1 (Metro)</span>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-primary border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">A</div>
+<div class="w-8 h-8 rounded-full bg-secondary border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">M</div>
+</div>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 85%"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-label-md">Tier 2 &amp; 3 (Emerging)</span>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed-dim border-2 border-white flex items-center justify-center text-[10px] text-black font-bold">F</div>
+<div class="w-8 h-8 rounded-full bg-tertiary-container border-2 border-white flex items-center justify-center text-[10px] text-white font-bold">MS</div>
+</div>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 62%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Deep Dive Charts Placeholder -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-card-gap">
+<div class="bg-white rounded-xl p-8 card-shadow border border-white/50">
+<h3 class="font-title-lg mb-6">Price Competitiveness Index</h3>
+<div class="h-64 flex items-end gap-6 px-4">
+<div class="flex-1 bg-surface-container-high rounded-t-lg relative group transition-all hover:bg-primary/10">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">92%</div>
+<div class="bg-primary w-full h-[92%] rounded-t-lg"></div>
+<p class="absolute top-full mt-2 w-full text-center text-xs font-bold">Amazon</p>
+</div>
+<div class="flex-1 bg-surface-container-high rounded-t-lg relative group transition-all hover:bg-primary/10">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">88%</div>
+<div class="bg-secondary w-full h-[88%] rounded-t-lg"></div>
+<p class="absolute top-full mt-2 w-full text-center text-xs font-bold">Flipkart</p>
+</div>
+<div class="flex-1 bg-surface-container-high rounded-t-lg relative group transition-all hover:bg-primary/10">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">97%</div>
+<div class="bg-secondary-fixed-dim w-full h-[97%] rounded-t-lg"></div>
+<p class="absolute top-full mt-2 w-full text-center text-xs font-bold">Meesho</p>
+</div>
+<div class="flex-1 bg-surface-container-high rounded-t-lg relative group transition-all hover:bg-primary/10">
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">74%</div>
+<div class="bg-tertiary-container w-full h-[74%] rounded-t-lg"></div>
+<p class="absolute top-full mt-2 w-full text-center text-xs font-bold">Myntra</p>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl p-8 card-shadow border border-white/50 relative overflow-hidden">
+<h3 class="font-title-lg mb-2">Platform Loyalty Trend</h3>
+<p class="text-on-surface-variant text-sm mb-8">Quarter-on-quarter shift in cross-shopping behavior.</p>
+<div class="relative h-60 w-full">
+<!-- Abstract Wave Representation -->
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 400 150">
+<path d="M0 120 Q 50 110 100 80 T 200 60 T 300 40 T 400 20" fill="none" stroke="#000" stroke-linecap="round" stroke-width="4"></path>
+<path d="M0 130 Q 50 140 100 100 T 200 90 T 300 110 T 400 80" fill="none" stroke="#006c49" stroke-linecap="round" stroke-opacity="0.3" stroke-width="4"></path>
+</svg>
+<div class="absolute top-4 right-4 flex flex-col gap-2">
+<div class="flex items-center gap-2 text-xs font-bold"><span class="w-4 h-1 bg-primary"></span> High Intent</div>
+<div class="flex items-center gap-2 text-xs font-bold opacity-40"><span class="w-4 h-1 bg-secondary"></span> Exploratory</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Floating Action for Quick Compare -->
+<div class="fixed bottom-10 right-10 z-50">
+<button class="w-16 h-16 rounded-full bg-primary text-on-primary shadow-2xl flex items-center justify-center group hover:scale-110 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-3xl">add</span>
+<span class="absolute right-full mr-4 bg-on-surface text-white px-4 py-2 rounded-lg text-sm font-bold opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap">Compare New Entity</span>
+</button>
+</div>
+<script>
+        // Simple Interaction logic
+        document.querySelectorAll('.neumorphic-button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                console.log('Action Triggered: ' + this.innerText.trim());
+            });
+        });
+
+        // Dynamic greeting based on time
+        const hour = new Date().getHours();
+        const navTitle = document.querySelector('.font-headline-md');
+        if (hour < 12) {
+            console.log('Good Morning, Executive.');
+        } else if (hour < 18) {
+            console.log('Good Afternoon, Executive.');
+        } else {
+            console.log('Good Evening, Executive.');
+        }
+    </script>
+</body></html>

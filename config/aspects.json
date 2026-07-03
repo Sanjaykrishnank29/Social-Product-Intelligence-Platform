@@ -1,0 +1,7 @@
+{
+  "delivery_packaging": ["delivery", "shipping", "delay", "late", "package", "packaging", "courier", "speed", "box", "packet"],
+  "product_quality": ["quality", "material", "fake", "original", "genuine", "damaged", "defective", "broken", "duplicate", "size", "fit"],
+  "price_value": ["price", "expensive", "cheap", "cost", "discount", "coupon", "deal", "offer", "value", "worth"],
+  "returns_refunds": ["refund", "return", "refunded", "exchange", "replacement", "replaced", "cancel", "money back"],
+  "app_ux": ["app", "bug", "crash", "payment", "checkout", "search", "loading", "ui", "ux", "login", "slow"]
+}
